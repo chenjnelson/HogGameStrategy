@@ -311,7 +311,7 @@ for (ij in 199:0) {
           for (n in (l50:h50)){P_roll50 = P_roll50 + P[i+1,j+1,k+1+n] * fifty_r[n-99]}
           
           max_prob = max(P_roll1,P_roll2,P_roll3,P_roll4,P_roll5,P_roll6,P_roll7,P_roll8,P_roll9,P_roll10,P_roll11,P_roll12,P_roll13,P_roll14,P_roll15,P_roll16,P_roll17,P_roll18,P_roll19,P_roll20,P_roll21,P_roll22,P_roll23,P_roll24,P_roll25,P_roll26,P_roll27,P_roll28,P_roll29,P_roll30,P_roll31,P_roll32,P_roll33,P_roll34,P_roll35,P_roll36,P_roll37,P_roll38,P_roll39,P_roll40,P_roll41,P_roll42,P_roll43,P_roll44,P_roll45,P_roll46,P_roll47,P_roll48,P_roll49,P_roll50,P_hold)
-          V[i+1,j+1,k+1]=max_prob
+          P[i+1,j+1,k+1]=max_prob
           
           if (max_prob == P_roll50){ D[i+1,j+1,k+1] = 50}
           else if (max_prob ==P_roll49){ D[i+1,j+1,k+1] = 49}
