@@ -181,10 +181,10 @@ l48 = 2 *48; h48 =48 * 6
 l49 = 2 *49; h49 =49 * 6
 l50 = 2 *50; h50 =50 * 6
 
-#V is the probability of winning the game
-V=array(0,c(100+(6*50),100+(6*50),100 + (6*50)))
-#U is the optimal decision to make
-U=array(0,c(100+(6*50),100+(6*50),100 + (6*50)))
+#P is the probability of winning the game
+P=array(0,c(100+(6*50),100+(6*50),100 + (6*50)))
+#D is the optimal decision to make
+D=array(0,c(100+(6*50),100+(6*50),100 + (6*50)))
 
 #loop for all the possible sUms
 for (ij in 199:0) {
@@ -196,191 +196,178 @@ for (ij in 199:0) {
 
       #I might need to refix this part
       if (i + k >= 100){ #Win
-        V[i+1,j+1,k+1] = 1
-        U[i+1,j+1,k+1] = 0 #hold
+        P[i+1,j+1,k+1] = 1
+        D[i+1,j+1,k+1] = 0 #hold
       }
       else{
         if (j >= 100){ # Lose
-          V[i+1,j+1,k+1] = 0
-          U[i+1,j+1,k+1] = 99 #nothing since you lost
+          P[i+1,j+1,k+1] = 0
+          D[i+1,j+1,k+1] = 99 #nothing since you lost
         }
         
         else{ # Calculate probability of holding and rolling different numbers of dice
-          V_hold = (1 - V[j+1,i+1+max(k,1),1])
+          P_hold = (1 - P[j+1,i+1+max(k,1),1])
           
-          V_roll1 = (1 - V[j+1,i+1+1,1]) * one_p
-          V_roll2 = (1 - V[j+1,i+1+1,1]) * two_p
-          V_roll3 = (1 - V[j+1,i+1+1,1]) * three_p
-          V_roll4 = (1 - V[j+1,i+1+1,1]) * four_p
-          V_roll5 = (1 - V[j+1,i+1+1,1]) * five_p
-          V_roll6 = (1 - V[j+1,i+1+1,1]) * six_p
-          V_roll7 = (1 - V[j+1,i+1+1,1]) * seven_p
-          V_roll8 = (1 - V[j+1,i+1+1,1]) * eight_p
-          V_roll9 = (1 - V[j+1,i+1+1,1]) * nine_p
-          V_roll10 = (1 - V[j+1,i+1+1,1]) * ten_p
-          V_roll11 = (1 - V[j+1,i+1+1,1]) * elevent_p
-          V_roll12 = (1 - V[j+1,i+1+1,1]) * twelve_p
-          V_roll13 = (1 - V[j+1,i+1+1,1]) * thirteen_p
-          V_roll14 = (1 - V[j+1,i+1+1,1]) * fourteen_p
-          V_roll15 = (1 - V[j+1,i+1+1,1]) * fifteen_p
-          V_roll16 = (1 - V[j+1,i+1+1,1]) * sixteen_p
-          V_roll17 = (1 - V[j+1,i+1+1,1]) * seventeen_p
-          V_roll18 = (1 - V[j+1,i+1+1,1]) * eighteen_p
-          V_roll19 = (1 - V[j+1,i+1+1,1]) * nineteen_p
-          V_roll20 = (1 - V[j+1,i+1+1,1]) * twenty_p
-          V_roll21 = (1 - V[j+1,i+1+1,1]) * twentyone_p
-          V_roll22 = (1 - V[j+1,i+1+1,1]) * twentytwo_p
-          V_roll23 = (1 - V[j+1,i+1+1,1]) * twentythree_p
-          V_roll24 = (1 - V[j+1,i+1+1,1]) * twentyfour_p
-          V_roll25 = (1 - V[j+1,i+1+1,1]) * twentyfive_p
-          V_roll26 = (1 - V[j+1,i+1+1,1]) * twentysix_p
-          V_roll27 = (1 - V[j+1,i+1+1,1]) * twentyseven_p
-          V_roll28 = (1 - V[j+1,i+1+1,1]) * twentyeight_p
-          V_roll29 = (1 - V[j+1,i+1+1,1]) * twentynine_p
-          V_roll30 = (1 - V[j+1,i+1+1,1]) * thirty_p
-          V_roll31 = (1 - V[j+1,i+1+1,1]) * thirtyone_p
-          V_roll32 = (1 - V[j+1,i+1+1,1]) * thirtytwo_p
-          V_roll33 = (1 - V[j+1,i+1+1,1]) * thirtythree_p
-          V_roll34 = (1 - V[j+1,i+1+1,1]) * thirtyfour_p
-          V_roll35 = (1 - V[j+1,i+1+1,1]) * thirtyfive_p
-          V_roll36 = (1 - V[j+1,i+1+1,1]) * thirtysix_p
-          V_roll37 = (1 - V[j+1,i+1+1,1]) * thirtyseven_p
-          V_roll38 = (1 - V[j+1,i+1+1,1]) * thirtyeight_p
-          V_roll39 = (1 - V[j+1,i+1+1,1]) * thirtynine_p
-          V_roll40 = (1 - V[j+1,i+1+1,1]) * fourty_p
-          V_roll41 = (1 - V[j+1,i+1+1,1]) * fourtyone_p
-          V_roll42 = (1 - V[j+1,i+1+1,1]) * fourtytwo_p
-          V_roll43 = (1 - V[j+1,i+1+1,1]) * fourtythree_p
-          V_roll44 = (1 - V[j+1,i+1+1,1]) * fourtyfour_p
-          V_roll45 = (1 - V[j+1,i+1+1,1]) * fourtyfive_p
-          V_roll46 = (1 - V[j+1,i+1+1,1]) * fourtysix_p
-          V_roll47 = (1 - V[j+1,i+1+1,1]) * fourtyseven_p
-          V_roll48 = (1 - V[j+1,i+1+1,1]) * fourtyeight_p
-          V_roll49 = (1 - V[j+1,i+1+1,1]) * fourtynine_p
-          V_roll50 = (1 - V[j+1,i+1+1,1]) * fifty_p
+          P_roll1 = (1 - P[j+1,i+1+1,1]) * one_p
+          P_roll2 = (1 - P[j+1,i+1+1,1]) * two_p
+          P_roll3 = (1 - P[j+1,i+1+1,1]) * three_p
+          P_roll4 = (1 - P[j+1,i+1+1,1]) * four_p
+          P_roll5 = (1 - P[j+1,i+1+1,1]) * five_p
+          P_roll6 = (1 - P[j+1,i+1+1,1]) * six_p
+          P_roll7 = (1 - P[j+1,i+1+1,1]) * seven_p
+          P_roll8 = (1 - P[j+1,i+1+1,1]) * eight_p
+          P_roll9 = (1 - P[j+1,i+1+1,1]) * nine_p
+          P_roll10 = (1 - P[j+1,i+1+1,1]) * ten_p
+          P_roll11 = (1 - P[j+1,i+1+1,1]) * elevent_p
+          P_roll12 = (1 - P[j+1,i+1+1,1]) * twelve_p
+          P_roll13 = (1 - P[j+1,i+1+1,1]) * thirteen_p
+          P_roll14 = (1 - P[j+1,i+1+1,1]) * fourteen_p
+          P_roll15 = (1 - P[j+1,i+1+1,1]) * fifteen_p
+          P_roll16 = (1 - P[j+1,i+1+1,1]) * sixteen_p
+          P_roll17 = (1 - P[j+1,i+1+1,1]) * seventeen_p
+          P_roll18 = (1 - P[j+1,i+1+1,1]) * eighteen_p
+          P_roll19 = (1 - P[j+1,i+1+1,1]) * nineteen_p
+          P_roll20 = (1 - P[j+1,i+1+1,1]) * twenty_p
+          P_roll21 = (1 - P[j+1,i+1+1,1]) * twentyone_p
+          P_roll22 = (1 - P[j+1,i+1+1,1]) * twentytwo_p
+          P_roll23 = (1 - P[j+1,i+1+1,1]) * twentythree_p
+          P_roll24 = (1 - P[j+1,i+1+1,1]) * twentyfour_p
+          P_roll25 = (1 - P[j+1,i+1+1,1]) * twentyfive_p
+          P_roll26 = (1 - P[j+1,i+1+1,1]) * twentysix_p
+          P_roll27 = (1 - P[j+1,i+1+1,1]) * twentyseven_p
+          P_roll28 = (1 - P[j+1,i+1+1,1]) * twentyeight_p
+          P_roll29 = (1 - P[j+1,i+1+1,1]) * twentynine_p
+          P_roll30 = (1 - P[j+1,i+1+1,1]) * thirty_p
+          P_roll31 = (1 - P[j+1,i+1+1,1]) * thirtyone_p
+          P_roll32 = (1 - P[j+1,i+1+1,1]) * thirtytwo_p
+          P_roll33 = (1 - P[j+1,i+1+1,1]) * thirtythree_p
+          P_roll34 = (1 - P[j+1,i+1+1,1]) * thirtyfour_p
+          P_roll35 = (1 - P[j+1,i+1+1,1]) * thirtyfive_p
+          P_roll36 = (1 - P[j+1,i+1+1,1]) * thirtysix_p
+          P_roll37 = (1 - P[j+1,i+1+1,1]) * thirtyseven_p
+          P_roll38 = (1 - P[j+1,i+1+1,1]) * thirtyeight_p
+          P_roll39 = (1 - P[j+1,i+1+1,1]) * thirtynine_p
+          P_roll40 = (1 - P[j+1,i+1+1,1]) * fourty_p
+          P_roll41 = (1 - P[j+1,i+1+1,1]) * fourtyone_p
+          P_roll42 = (1 - P[j+1,i+1+1,1]) * fourtytwo_p
+          P_roll43 = (1 - P[j+1,i+1+1,1]) * fourtythree_p
+          P_roll44 = (1 - P[j+1,i+1+1,1]) * fourtyfour_p
+          P_roll45 = (1 - P[j+1,i+1+1,1]) * fourtyfive_p
+          P_roll46 = (1 - P[j+1,i+1+1,1]) * fourtysix_p
+          P_roll47 = (1 - P[j+1,i+1+1,1]) * fourtyseven_p
+          P_roll48 = (1 - P[j+1,i+1+1,1]) * fourtyeight_p
+          P_roll49 = (1 - P[j+1,i+1+1,1]) * fourtynine_p
+          P_roll50 = (1 - P[j+1,i+1+1,1]) * fifty_p
           
-          for (n in (l1:h1)){V_roll1 = V_roll1 + V[i+1,j+1,k+1+n] * one_r[n-1]}
-          for (n in (l2:h2)){V_roll2 = V_roll2 + V[i+1,j+1,k+1+n] * two_r[n-3]}
-          for (n in (l3:h3)){V_roll3 = V_roll3 + V[i+1,j+1,k+1+n] * three_r[n-5]}
-          for (n in (l4:h4)){V_roll4 = V_roll4 + V[i+1,j+1,k+1+n] * four_r[n-7]}
-          for (n in (l5:h5)){V_roll5 = V_roll5 + V[i+1,j+1,k+1+n] * five_r[n-9]}
-          for (n in (l6:h6)){V_roll6 = V_roll6 + V[i+1,j+1,k+1+n] * six_r[n-11]}
-          for (n in (l7:h7)){V_roll7 = V_roll7 + V[i+1,j+1,k+1+n] * seven_r[n-13]}
-          for (n in (l8:h8)){V_roll8 = V_roll8 + V[i+1,j+1,k+1+n] * eight_r[n-15]}
-          for (n in (l9:h9)){V_roll9 = V_roll9 + V[i+1,j+1,k+1+n] * nine_r[n-17]}
-          for (n in (l10:h10)){V_roll10 = V_roll10 + V[i+1,j+1,k+1+n] * ten_r[n-19]}
-          for (n in (l11:h11)){V_roll11 = V_roll11 + V[i+1,j+1,k+1+n] * elevent_r[n-21]}
-          for (n in (l12:h12)){V_roll12 = V_roll12 + V[i+1,j+1,k+1+n] * twelve_r[n-23]}
-          for (n in (l13:h13)){V_roll13 = V_roll13 + V[i+1,j+1,k+1+n] * thirteen_r[n-25]}
-          for (n in (l14:h14)){V_roll14 = V_roll14 + V[i+1,j+1,k+1+n] * fourteen_r[n-27]}
-          for (n in (l15:h15)){V_roll15 = V_roll15 + V[i+1,j+1,k+1+n] * fifteen_r[n-29]}
-          for (n in (l16:h16)){V_roll16 = V_roll16 + V[i+1,j+1,k+1+n] * sixteen_r[n-31]}
-          for (n in (l17:h17)){V_roll17 = V_roll17 + V[i+1,j+1,k+1+n] * seventeen_r[n-33]}
-          for (n in (l18:h18)){V_roll18 = V_roll18 + V[i+1,j+1,k+1+n] * eighteen_r[n-35]}
-          for (n in (l19:h19)){V_roll19 = V_roll19 + V[i+1,j+1,k+1+n] * nineteen_r[n-37]}
-          for (n in (l20:h20)){V_roll20 = V_roll20 + V[i+1,j+1,k+1+n] * twenty_r[n-39]}
-          for (n in (l21:h21)){V_roll21 = V_roll21 + V[i+1,j+1,k+1+n] * twentyone_r[n-41]}
-          for (n in (l22:h22)){V_roll22 = V_roll22 + V[i+1,j+1,k+1+n] * twentytwo_r[n-43]}
-          for (n in (l23:h23)){V_roll23 = V_roll23 + V[i+1,j+1,k+1+n] * twentythree_r[n-45]}
-          for (n in (l24:h24)){V_roll24 = V_roll24 + V[i+1,j+1,k+1+n] * twentyfour_r[n-47]}
-          for (n in (l25:h25)){V_roll25 = V_roll25 + V[i+1,j+1,k+1+n] * twentyfive_r[n-49]}
-          for (n in (l26:h26)){V_roll26 = V_roll26 + V[i+1,j+1,k+1+n] * twentysix_r[n-51]}
-          for (n in (l27:h27)){V_roll27 = V_roll27 + V[i+1,j+1,k+1+n] * twentyseven_r[n-53]}
-          for (n in (l28:h28)){V_roll28 = V_roll28 + V[i+1,j+1,k+1+n] * twentyeight_r[n-55]}
-          for (n in (l29:h29)){V_roll29 = V_roll29 + V[i+1,j+1,k+1+n] * twentynine_r[n-57]}
-          for (n in (l30:h30)){V_roll30 = V_roll30 + V[i+1,j+1,k+1+n] * thirty_r[n-59]}
-          for (n in (l31:h31)){V_roll31 = V_roll31 + V[i+1,j+1,k+1+n] * thirtyone_r[n-61]}
-          for (n in (l32:h32)){V_roll32 = V_roll32 + V[i+1,j+1,k+1+n] * thirtytwo_r[n-63]}
-          for (n in (l33:h33)){V_roll33 = V_roll33 + V[i+1,j+1,k+1+n] * thirtythree_r[n-65]}
-          for (n in (l34:h34)){V_roll34 = V_roll34 + V[i+1,j+1,k+1+n] * thirtyfour_r[n-67]}
-          for (n in (l35:h35)){V_roll35 = V_roll35 + V[i+1,j+1,k+1+n] * thirtyfive_r[n-69]}
-          for (n in (l36:h36)){V_roll36 = V_roll36 + V[i+1,j+1,k+1+n] * thirtysix_r[n-71]}
-          for (n in (l37:h37)){V_roll37 = V_roll37 + V[i+1,j+1,k+1+n] * thirtyseven_r[n-73]}
-          for (n in (l38:h38)){V_roll38 = V_roll38 + V[i+1,j+1,k+1+n] * thirtyeight_r[n-75]}
-          for (n in (l39:h39)){V_roll39 = V_roll39 + V[i+1,j+1,k+1+n] * thirtynine_r[n-77]}
-          for (n in (l40:h40)){V_roll40 = V_roll40 + V[i+1,j+1,k+1+n] * fourty_r[n-79]}
-          for (n in (l41:h41)){V_roll41 = V_roll41 + V[i+1,j+1,k+1+n] * fourtyone_r[n-81]}
-          for (n in (l42:h42)){V_roll42 = V_roll42 + V[i+1,j+1,k+1+n] * fourtytwo_r[n-83]}
-          for (n in (l43:h43)){V_roll43 = V_roll43 + V[i+1,j+1,k+1+n] * fourtythree_r[n-85]}
-          for (n in (l44:h44)){V_roll44 = V_roll44 + V[i+1,j+1,k+1+n] * fourtyfour_r[n-87]}
-          for (n in (l45:h45)){V_roll45 = V_roll45 + V[i+1,j+1,k+1+n] * fourtyfive_r[n-89]}
-          for (n in (l46:h46)){V_roll46 = V_roll46 + V[i+1,j+1,k+1+n] * fourtysix_r[n-91]}
-          for (n in (l47:h47)){V_roll47 = V_roll47 + V[i+1,j+1,k+1+n] * fourtyseven_r[n-93]}
-          for (n in (l48:h48)){V_roll48 = V_roll48 + V[i+1,j+1,k+1+n] * fourtyeight_r[n-95]}
-          for (n in (l49:h49)){V_roll49 = V_roll49 + V[i+1,j+1,k+1+n] * fourtynine_r[n-97]}
-          for (n in (l50:h50)){V_roll50 = V_roll50 + V[i+1,j+1,k+1+n] * fifty_r[n-99]}
+          for (n in (l1:h1)){P_roll1 = P_roll1 + P[i+1,j+1,k+1+n] * one_r[n-1]}
+          for (n in (l2:h2)){P_roll2 = P_roll2 + P[i+1,j+1,k+1+n] * two_r[n-3]}
+          for (n in (l3:h3)){P_roll3 = P_roll3 + P[i+1,j+1,k+1+n] * three_r[n-5]}
+          for (n in (l4:h4)){P_roll4 = P_roll4 + P[i+1,j+1,k+1+n] * four_r[n-7]}
+          for (n in (l5:h5)){P_roll5 = P_roll5 + P[i+1,j+1,k+1+n] * five_r[n-9]}
+          for (n in (l6:h6)){P_roll6 = P_roll6 + P[i+1,j+1,k+1+n] * six_r[n-11]}
+          for (n in (l7:h7)){P_roll7 = P_roll7 + P[i+1,j+1,k+1+n] * seven_r[n-13]}
+          for (n in (l8:h8)){P_roll8 = P_roll8 + P[i+1,j+1,k+1+n] * eight_r[n-15]}
+          for (n in (l9:h9)){P_roll9 = P_roll9 + P[i+1,j+1,k+1+n] * nine_r[n-17]}
+          for (n in (l10:h10)){P_roll10 = P_roll10 + P[i+1,j+1,k+1+n] * ten_r[n-19]}
+          for (n in (l11:h11)){P_roll11 = P_roll11 + P[i+1,j+1,k+1+n] * elevent_r[n-21]}
+          for (n in (l12:h12)){P_roll12 = P_roll12 + P[i+1,j+1,k+1+n] * twelve_r[n-23]}
+          for (n in (l13:h13)){P_roll13 = P_roll13 + P[i+1,j+1,k+1+n] * thirteen_r[n-25]}
+          for (n in (l14:h14)){P_roll14 = P_roll14 + P[i+1,j+1,k+1+n] * fourteen_r[n-27]}
+          for (n in (l15:h15)){P_roll15 = P_roll15 + P[i+1,j+1,k+1+n] * fifteen_r[n-29]}
+          for (n in (l16:h16)){P_roll16 = P_roll16 + P[i+1,j+1,k+1+n] * sixteen_r[n-31]}
+          for (n in (l17:h17)){P_roll17 = P_roll17 + P[i+1,j+1,k+1+n] * seventeen_r[n-33]}
+          for (n in (l18:h18)){P_roll18 = P_roll18 + P[i+1,j+1,k+1+n] * eighteen_r[n-35]}
+          for (n in (l19:h19)){P_roll19 = P_roll19 + P[i+1,j+1,k+1+n] * nineteen_r[n-37]}
+          for (n in (l20:h20)){P_roll20 = P_roll20 + P[i+1,j+1,k+1+n] * twenty_r[n-39]}
+          for (n in (l21:h21)){P_roll21 = P_roll21 + P[i+1,j+1,k+1+n] * twentyone_r[n-41]}
+          for (n in (l22:h22)){P_roll22 = P_roll22 + P[i+1,j+1,k+1+n] * twentytwo_r[n-43]}
+          for (n in (l23:h23)){P_roll23 = P_roll23 + P[i+1,j+1,k+1+n] * twentythree_r[n-45]}
+          for (n in (l24:h24)){P_roll24 = P_roll24 + P[i+1,j+1,k+1+n] * twentyfour_r[n-47]}
+          for (n in (l25:h25)){P_roll25 = P_roll25 + P[i+1,j+1,k+1+n] * twentyfive_r[n-49]}
+          for (n in (l26:h26)){P_roll26 = P_roll26 + P[i+1,j+1,k+1+n] * twentysix_r[n-51]}
+          for (n in (l27:h27)){P_roll27 = P_roll27 + P[i+1,j+1,k+1+n] * twentyseven_r[n-53]}
+          for (n in (l28:h28)){P_roll28 = P_roll28 + P[i+1,j+1,k+1+n] * twentyeight_r[n-55]}
+          for (n in (l29:h29)){P_roll29 = P_roll29 + P[i+1,j+1,k+1+n] * twentynine_r[n-57]}
+          for (n in (l30:h30)){P_roll30 = P_roll30 + P[i+1,j+1,k+1+n] * thirty_r[n-59]}
+          for (n in (l31:h31)){P_roll31 = P_roll31 + P[i+1,j+1,k+1+n] * thirtyone_r[n-61]}
+          for (n in (l32:h32)){P_roll32 = P_roll32 + P[i+1,j+1,k+1+n] * thirtytwo_r[n-63]}
+          for (n in (l33:h33)){P_roll33 = P_roll33 + P[i+1,j+1,k+1+n] * thirtythree_r[n-65]}
+          for (n in (l34:h34)){P_roll34 = P_roll34 + P[i+1,j+1,k+1+n] * thirtyfour_r[n-67]}
+          for (n in (l35:h35)){P_roll35 = P_roll35 + P[i+1,j+1,k+1+n] * thirtyfive_r[n-69]}
+          for (n in (l36:h36)){P_roll36 = P_roll36 + P[i+1,j+1,k+1+n] * thirtysix_r[n-71]}
+          for (n in (l37:h37)){P_roll37 = P_roll37 + P[i+1,j+1,k+1+n] * thirtyseven_r[n-73]}
+          for (n in (l38:h38)){P_roll38 = P_roll38 + P[i+1,j+1,k+1+n] * thirtyeight_r[n-75]}
+          for (n in (l39:h39)){P_roll39 = P_roll39 + P[i+1,j+1,k+1+n] * thirtynine_r[n-77]}
+          for (n in (l40:h40)){P_roll40 = P_roll40 + P[i+1,j+1,k+1+n] * fourty_r[n-79]}
+          for (n in (l41:h41)){P_roll41 = P_roll41 + P[i+1,j+1,k+1+n] * fourtyone_r[n-81]}
+          for (n in (l42:h42)){P_roll42 = P_roll42 + P[i+1,j+1,k+1+n] * fourtytwo_r[n-83]}
+          for (n in (l43:h43)){P_roll43 = P_roll43 + P[i+1,j+1,k+1+n] * fourtythree_r[n-85]}
+          for (n in (l44:h44)){P_roll44 = P_roll44 + P[i+1,j+1,k+1+n] * fourtyfour_r[n-87]}
+          for (n in (l45:h45)){P_roll45 = P_roll45 + P[i+1,j+1,k+1+n] * fourtyfive_r[n-89]}
+          for (n in (l46:h46)){P_roll46 = P_roll46 + P[i+1,j+1,k+1+n] * fourtysix_r[n-91]}
+          for (n in (l47:h47)){P_roll47 = P_roll47 + P[i+1,j+1,k+1+n] * fourtyseven_r[n-93]}
+          for (n in (l48:h48)){P_roll48 = P_roll48 + P[i+1,j+1,k+1+n] * fourtyeight_r[n-95]}
+          for (n in (l49:h49)){P_roll49 = P_roll49 + P[i+1,j+1,k+1+n] * fourtynine_r[n-97]}
+          for (n in (l50:h50)){P_roll50 = P_roll50 + P[i+1,j+1,k+1+n] * fifty_r[n-99]}
           
-          max_prob = max(V_roll1,V_roll2,V_roll3,V_roll4,V_roll5,V_roll6,V_roll7,V_roll8,V_roll9,V_roll10,V_roll11,V_roll12,V_roll13,V_roll14,V_roll15,V_roll16,V_roll17,V_roll18,V_roll19,V_roll20,V_roll21,V_roll22,V_roll23,V_roll24,V_roll25,V_roll26,V_roll27,V_roll28,V_roll29,V_roll30,V_roll31,V_roll32,V_roll33,V_roll34,V_roll35,V_roll36,V_roll37,V_roll38,V_roll39,V_roll40,V_roll41,V_roll42,V_roll43,V_roll44,V_roll45,V_roll46,V_roll47,V_roll48,V_roll49,V_roll50,V_hold)
+          max_prob = max(P_roll1,P_roll2,P_roll3,P_roll4,P_roll5,P_roll6,P_roll7,P_roll8,P_roll9,P_roll10,P_roll11,P_roll12,P_roll13,P_roll14,P_roll15,P_roll16,P_roll17,P_roll18,P_roll19,P_roll20,P_roll21,P_roll22,P_roll23,P_roll24,P_roll25,P_roll26,P_roll27,P_roll28,P_roll29,P_roll30,P_roll31,P_roll32,P_roll33,P_roll34,P_roll35,P_roll36,P_roll37,P_roll38,P_roll39,P_roll40,P_roll41,P_roll42,P_roll43,P_roll44,P_roll45,P_roll46,P_roll47,P_roll48,P_roll49,P_roll50,P_hold)
           V[i+1,j+1,k+1]=max_prob
           
-          if (max_prob == V_roll50){ U[i+1,j+1,k+1] = 50}
-          else if (max_prob ==V_roll49){ U[i+1,j+1,k+1] = 49}
-          else if (max_prob ==V_roll48){ U[i+1,j+1,k+1] = 48}
-          else if (max_prob ==V_roll47){ U[i+1,j+1,k+1] = 47}
-          else if (max_prob ==V_roll46){ U[i+1,j+1,k+1] = 46}
-          else if (max_prob ==V_roll45){ U[i+1,j+1,k+1] = 45}
-          else if (max_prob ==V_roll44){ U[i+1,j+1,k+1] = 44}
-          else if (max_prob ==V_roll43){ U[i+1,j+1,k+1] = 43}
-          else if (max_prob ==V_roll42){ U[i+1,j+1,k+1] = 42}
-          else if (max_prob ==V_roll41){ U[i+1,j+1,k+1] = 41}
-          else if (max_prob ==V_roll40){ U[i+1,j+1,k+1] = 40}
-          else if (max_prob ==V_roll39){ U[i+1,j+1,k+1] = 39}
-          else if (max_prob ==V_roll38){ U[i+1,j+1,k+1] = 38}
-          else if (max_prob ==V_roll37){ U[i+1,j+1,k+1] = 37}
-          else if (max_prob ==V_roll36){ U[i+1,j+1,k+1] = 36}
-          else if (max_prob ==V_roll35){ U[i+1,j+1,k+1] = 35}
-          else if (max_prob ==V_roll34){ U[i+1,j+1,k+1] = 34}
-          else if (max_prob ==V_roll33){ U[i+1,j+1,k+1] = 33}
-          else if (max_prob ==V_roll32){ U[i+1,j+1,k+1] = 32}
-          else if (max_prob ==V_roll31){ U[i+1,j+1,k+1] = 31}   
-          else if (max_prob ==V_roll30){ U[i+1,j+1,k+1] = 30}       
-          else if (max_prob ==V_roll29){ U[i+1,j+1,k+1] = 29}
-          else if (max_prob ==V_roll28){ U[i+1,j+1,k+1] = 28}
-          else if (max_prob ==V_roll27){ U[i+1,j+1,k+1] = 27}
-          else if (max_prob ==V_roll26){ U[i+1,j+1,k+1] = 26}
-          else if (max_prob ==V_roll25){ U[i+1,j+1,k+1] = 25}
-          else if (max_prob ==V_roll24){ U[i+1,j+1,k+1] = 24}
-          else if (max_prob ==V_roll23){ U[i+1,j+1,k+1] = 23}
-          else if (max_prob ==V_roll22){ U[i+1,j+1,k+1] = 22}
-          else if (max_prob ==V_roll21){ U[i+1,j+1,k+1] = 21} 
-          else if (max_prob ==V_roll20){ U[i+1,j+1,k+1] = 20}
-          else if (max_prob ==V_roll19){ U[i+1,j+1,k+1] = 19}
-          else if (max_prob ==V_roll18){ U[i+1,j+1,k+1] = 18}
-          else if (max_prob ==V_roll17){ U[i+1,j+1,k+1] = 17}
-          else if (max_prob ==V_roll16){ U[i+1,j+1,k+1] = 16}
-          else if (max_prob ==V_roll15){ U[i+1,j+1,k+1] = 15}
-          else if (max_prob ==V_roll14){ U[i+1,j+1,k+1] = 14}
-          else if (max_prob ==V_roll13){ U[i+1,j+1,k+1] = 13}
-          else if (max_prob ==V_roll12){ U[i+1,j+1,k+1] = 12}
-          else if (max_prob ==V_roll11){ U[i+1,j+1,k+1] = 11}
-          else if (max_prob ==V_roll10){ U[i+1,j+1,k+1] = 10}
-          else if (max_prob ==V_roll9){ U[i+1,j+1,k+1] = 9}
-          else if (max_prob ==V_roll8){ U[i+1,j+1,k+1] = 8}
-          else if (max_prob ==V_roll7){ U[i+1,j+1,k+1] = 7}
-          else if (max_prob ==V_roll6){ U[i+1,j+1,k+1] = 6}
-          else if (max_prob ==V_roll5){ U[i+1,j+1,k+1] = 5}
-          else if (max_prob ==V_roll4){ U[i+1,j+1,k+1] = 4}
-          else if (max_prob ==V_roll3){ U[i+1,j+1,k+1] = 3}
-          else if (max_prob ==V_roll2){ U[i+1,j+1,k+1] = 2}
-          else if (max_prob ==V_roll1){ U[i+1,j+1,k+1] = 1}
-          else{U[i+1,j+1,k+1] = 0} #hodl
+          if (max_prob == P_roll50){ D[i+1,j+1,k+1] = 50}
+          else if (max_prob ==P_roll49){ D[i+1,j+1,k+1] = 49}
+          else if (max_prob ==P_roll48){ D[i+1,j+1,k+1] = 48}
+          else if (max_prob ==P_roll47){ D[i+1,j+1,k+1] = 47}
+          else if (max_prob ==P_roll46){ D[i+1,j+1,k+1] = 46}
+          else if (max_prob ==P_roll45){ D[i+1,j+1,k+1] = 45}
+          else if (max_prob ==P_roll44){ D[i+1,j+1,k+1] = 44}
+          else if (max_prob ==P_roll43){ D[i+1,j+1,k+1] = 43}
+          else if (max_prob ==P_roll42){ D[i+1,j+1,k+1] = 42}
+          else if (max_prob ==P_roll41){ D[i+1,j+1,k+1] = 41}
+          else if (max_prob ==P_roll40){ D[i+1,j+1,k+1] = 40}
+          else if (max_prob ==P_roll39){ D[i+1,j+1,k+1] = 39}
+          else if (max_prob ==P_roll38){ D[i+1,j+1,k+1] = 38}
+          else if (max_prob ==P_roll37){ D[i+1,j+1,k+1] = 37}
+          else if (max_prob ==P_roll36){ D[i+1,j+1,k+1] = 36}
+          else if (max_prob ==P_roll35){ D[i+1,j+1,k+1] = 35}
+          else if (max_prob ==P_roll34){ D[i+1,j+1,k+1] = 34}
+          else if (max_prob ==P_roll33){ D[i+1,j+1,k+1] = 33}
+          else if (max_prob ==P_roll32){ D[i+1,j+1,k+1] = 32}
+          else if (max_prob ==P_roll31){ D[i+1,j+1,k+1] = 31}   
+          else if (max_prob ==P_roll30){ D[i+1,j+1,k+1] = 30}       
+          else if (max_prob ==P_roll29){ D[i+1,j+1,k+1] = 29}
+          else if (max_prob ==P_roll28){ D[i+1,j+1,k+1] = 28}
+          else if (max_prob ==P_roll27){ D[i+1,j+1,k+1] = 27}
+          else if (max_prob ==P_roll26){ D[i+1,j+1,k+1] = 26}
+          else if (max_prob ==P_roll25){ D[i+1,j+1,k+1] = 25}
+          else if (max_prob ==P_roll24){ D[i+1,j+1,k+1] = 24}
+          else if (max_prob ==P_roll23){ D[i+1,j+1,k+1] = 23}
+          else if (max_prob ==P_roll22){ D[i+1,j+1,k+1] = 22}
+          else if (max_prob ==P_roll21){ D[i+1,j+1,k+1] = 21} 
+          else if (max_prob ==P_roll20){ D[i+1,j+1,k+1] = 20}
+          else if (max_prob ==P_roll19){ D[i+1,j+1,k+1] = 19}
+          else if (max_prob ==P_roll18){ D[i+1,j+1,k+1] = 18}
+          else if (max_prob ==P_roll17){ D[i+1,j+1,k+1] = 17}
+          else if (max_prob ==P_roll16){ D[i+1,j+1,k+1] = 16}
+          else if (max_prob ==P_roll15){ D[i+1,j+1,k+1] = 15}
+          else if (max_prob ==P_roll14){ D[i+1,j+1,k+1] = 14}
+          else if (max_prob ==P_roll13){ D[i+1,j+1,k+1] = 13}
+          else if (max_prob ==P_roll12){ D[i+1,j+1,k+1] = 12}
+          else if (max_prob ==P_roll11){ D[i+1,j+1,k+1] = 11}
+          else if (max_prob ==P_roll10){ D[i+1,j+1,k+1] = 10}
+          else if (max_prob ==P_roll9){ D[i+1,j+1,k+1] = 9}
+          else if (max_prob ==P_roll8){ D[i+1,j+1,k+1] = 8}
+          else if (max_prob ==P_roll7){ D[i+1,j+1,k+1] = 7}
+          else if (max_prob ==P_roll6){ D[i+1,j+1,k+1] = 6}
+          else if (max_prob ==P_roll5){ D[i+1,j+1,k+1] = 5}
+          else if (max_prob ==P_roll4){ D[i+1,j+1,k+1] = 4}
+          else if (max_prob ==P_roll3){ D[i+1,j+1,k+1] = 3}
+          else if (max_prob ==P_roll2){ D[i+1,j+1,k+1] = 2}
+          else if (max_prob ==P_roll1){ D[i+1,j+1,k+1] = 1}
+          else{D[i+1,j+1,k+1] = 0} #hodl
         }
       }
     }      
   }
 }
 
-save(list = c('V','U'),file = 'VUfile.Rdata')  
-load("VUfile.RData")
-
-optimal_roll = melt(U)
-optimal_prob = melt(V)
-unique(optimal_roll['value']) #Most you will ever gamble is 16 otherwise
-optimal_prob[optimal_roll['value'] == 16,]
-max(optimal_prob[optimal_roll['value'] == 16,]['value'])*100 #At most you ever have 3.19% chance when you are throwing 16 dice anyways
-
-
-library(mgcv)
-#mod <- gam(value ~ te(Var1, Var2), data = optimal_prob)
-#wyk <- matrix(fitted(mod), ncol = 20) #8 i 10 tez ok
-#wireframe(wyk, drape=TRUE, colorkey=TRUE)
+save(list = c('P','D'),file = 'PDfile.Rdata') 
