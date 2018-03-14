@@ -1,5 +1,5 @@
 library(dplyr)
-library(Rmpfr) #Increase precision 
+library(Rmpfr)
 library(reshape2)
 
 #Choose r from n with precision
@@ -194,18 +194,21 @@ for (ij in 199:0) {
     #Run possible ValUes it takes to win 
     for (k in ((99 + (6*50))-i):0){  
 
-      #I might need to refix this part
-      if (i + k >= 100){ #Win
+      #You will win if you hold
+      if (i + k >= 100){
         P[i+1,j+1,k+1] = 1
-        D[i+1,j+1,k+1] = 0 #hold
+        D[i+1,j+1,k+1] = 0
       }
+      
+      #Lose
       else{
-        if (j >= 100){ # Lose
+        if (j >= 100){
           P[i+1,j+1,k+1] = 0
-          D[i+1,j+1,k+1] = 99 #nothing since you lost
+          D[i+1,j+1,k+1] = 99
         }
         
-        else{ # Calculate probability of holding and rolling different numbers of dice
+        # Calculate probability of holding and rolling different numbers of dice
+        else{ 
           P_hold = (1 - P[j+1,i+1+max(k,1),1])
           
           P_roll1 = (1 - P[j+1,i+1+1,1]) * one_p
@@ -310,6 +313,7 @@ for (ij in 199:0) {
           for (n in (l49:h49)){P_roll49 = P_roll49 + P[i+1,j+1,k+1+n] * fourtynine_r[n-97]}
           for (n in (l50:h50)){P_roll50 = P_roll50 + P[i+1,j+1,k+1+n] * fifty_r[n-99]}
           
+          #Evaluate the optimal decision
           max_prob = max(P_roll1,P_roll2,P_roll3,P_roll4,P_roll5,P_roll6,P_roll7,P_roll8,P_roll9,P_roll10,P_roll11,P_roll12,P_roll13,P_roll14,P_roll15,P_roll16,P_roll17,P_roll18,P_roll19,P_roll20,P_roll21,P_roll22,P_roll23,P_roll24,P_roll25,P_roll26,P_roll27,P_roll28,P_roll29,P_roll30,P_roll31,P_roll32,P_roll33,P_roll34,P_roll35,P_roll36,P_roll37,P_roll38,P_roll39,P_roll40,P_roll41,P_roll42,P_roll43,P_roll44,P_roll45,P_roll46,P_roll47,P_roll48,P_roll49,P_roll50,P_hold)
           P[i+1,j+1,k+1]=max_prob
           
@@ -363,7 +367,7 @@ for (ij in 199:0) {
           else if (max_prob ==P_roll3){ D[i+1,j+1,k+1] = 3}
           else if (max_prob ==P_roll2){ D[i+1,j+1,k+1] = 2}
           else if (max_prob ==P_roll1){ D[i+1,j+1,k+1] = 1}
-          else{D[i+1,j+1,k+1] = 0} #hodl
+          else{D[i+1,j+1,k+1] = 0} #hodl!
         }
       }
     }      
