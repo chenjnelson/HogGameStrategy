@@ -39,7 +39,7 @@ Hog adds complexity to this game in that a person can actually throw more dice t
 
 ![](https://latex.codecogs.com/gif.latex?P%28p%2Cn%2Cs%29%20%3D%20%281/6%29%5E%7Bn%7D%5Csum_%7Bk%3D0%7D%5E%7B%5Clfloor%20%28p-n%29/s%20%5Crfloor%29%7D%28-1%29%5E%7Bk%7D%7Bn%20%5Cchoose%20k%7D%7Bp-sk-1%20%5Cchoose%20n-1%7D)
 
-*p* is the value, *n* is the number of dice, and *s* is the number of sides to a single dice. To exclude all possibilities such that any dice comes up to one, I subtract 2 from the value *p* and *1* from s before calculating the exact probability. Then a comparison between all probabilities of winning across each possible throw of *n* dice and the probability of winning given a hold are computed at every step to determine the optimal strategy.
+*p* is the value, *n* is the number of dice, and *s* is the number of sides to a single dice. To exclude all possibilities such that any dice shows up with a value of 1, I subtract 2 from the value *p* (range of evaluations) and *1* from s (sides of the dice that won't penalize me) before calculating the exact probability. Then a comparison between all probabilities of winning across each possible throw of *n* dice and the probability of winning given a hold are computed at every step to determine the optimal strategy.
 
 I establish the limit of dice to be 50, being that the minimum sum of all dice after being rolled without any dice showing up as a 1 would be 100, automatically constituting a win. However, the likelihood of such a scenario is ![](https://latex.codecogs.com/gif.latex?5/6^{50}&space;=&space;0.000109884) which might be a naive move. If the expected value of throwing a dice is 4 without a *pig-out*, then *maybe* it might be better to throw 25.
 
