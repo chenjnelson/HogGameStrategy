@@ -1,7 +1,6 @@
 # Hog Game Strategy
 ***
 ### Implementation of Hog, a variation of the dice game Pig.
-
 #####Topics: Stochastic Dynamic Programming, Markov-chains, Artificial Intelligence, Game Theory
 
 
