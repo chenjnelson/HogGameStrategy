@@ -1,7 +1,6 @@
 library(dplyr)
 library(Rmpfr) #Increase precision 
 library(reshape2)
-library(rgl)
 
 #Choose r from n with precision
 choose_large <- function(n, r){
@@ -198,12 +197,12 @@ for (ij in 199:0) {
       #I might need to refix this part
       if (i + k >= 100){ #Win
         V[i+1,j+1,k+1] = 1
-        U[i+1,j+1,k+1] = 0 #roll
+        U[i+1,j+1,k+1] = 0 #hold
       }
       else{
         if (j >= 100){ # Lose
           V[i+1,j+1,k+1] = 0
-          U[i+1,j+1,k+1] = 0 #nothing
+          U[i+1,j+1,k+1] = 99 #nothing since you lost
         }
         
         else{ # Calculate probability of holding and rolling different numbers of dice
@@ -371,14 +370,17 @@ for (ij in 199:0) {
   }
 }
 
-
 save(list = c('V','U'),file = 'VUfile.Rdata')  
 load("VUfile.RData")
 
 optimal_roll = melt(U)
 optimal_prob = melt(V)
-optimal_roll[optimal_roll['value'] == 33,] #You are going to win anyways with at 99
 unique(optimal_roll['value']) #Most you will ever gamble is 16 otherwise
-
 optimal_prob[optimal_roll['value'] == 16,]
+max(optimal_prob[optimal_roll['value'] == 16,]['value'])*100 #At most you ever have 3.19% chance when you are throwing 16 dice anyways
 
+
+library(mgcv)
+#mod <- gam(value ~ te(Var1, Var2), data = optimal_prob)
+#wyk <- matrix(fitted(mod), ncol = 20) #8 i 10 tez ok
+#wireframe(wyk, drape=TRUE, colorkey=TRUE)
