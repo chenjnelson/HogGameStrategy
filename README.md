@@ -1,5 +1,5 @@
 # Hog Game Strategy
-***
+
 ## Implementation of Hog, a variation of the dice game Pig.
 ##### Topics: Stochastic Dynamic Programming, Markov chains, Artificial Intelligence, Game Theory
 
@@ -36,9 +36,9 @@ Several variations of the game Pig exists, but this code focuses on a combinatio
 The first component allows the game to have a finite set of rounds (if a *pig-out* does not add to a person's score, then theoretically the game could cycle infinitely). The benefit of this condition also makes it such that a dynamic programming solution can be created as there will be no cyclic dependencies and allow the game to be computed in stages.
 Hog adds complexity to this game in that a person can actually throw more dice to increase their score - changing the heuristic. Now in order to play optimally, one must actually estimate the probability of rolling *n* dice with each roll not containing a value of 1.
 
-![](https://latex.codecogs.com/gif.latex?P(p-2,n,s)&space;=&space;(1/6)^{n}\sum_{k=0}^{\lfloor&space;(p-n)/s&space;\rfloor)}(-1)^{k}{n&space;\choose&space;k}{p-sk-1&space;\choose&space;n-1})
+![](https://latex.codecogs.com/gif.latex?P(p,n,s)&space;=&space;(1/6)^{n}\sum_{k=0}^{\lfloor&space;(p-n)/s&space;\rfloor)} (-1)^{k}{n&space;\choose&space;k}{p-sk-1&space;\choose&space;n-1})
 
-Where *p* is the value, *n* is the number of dice, and *s* is the number of sides to a single dice. To exclude all possibilities such that any dice comes up to one, I subtract 2 from the value and calculate the probability as such.
+Where *p* is the value, *n* is the number of dice, and *s* is the number of sides to a single dice. To exclude all possibilities such that any dice comes up to one, I subtract 2 from the value p and calculate the probability off that.
 
 I establish the limit of dice to be 50, being that the minimum sum of all dice after being rolled without any dice showing up as a 1 would be 100 which automatically constitutes a win. However, the likelihood of such a scenario is: ![](https://latex.codecogs.com/gif.latex?5/6^{50}&space;=&space;0.000109884) , which might be a naive move. If the expected value of throwing a dice is 4 without *pigging-out*, then *maybe* it might be better to throw 25. Only after maximizing the probability of winning at all states reveal the optimal decisions.
 
