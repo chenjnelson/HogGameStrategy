@@ -36,9 +36,7 @@ Several variations of the game Pig exists, but this code focuses on a combinatio
 The first component allows the game to have a finite set of rounds (if a *pig-out* does not add to a person's score, then theoretically the game could cycle infinitely). The benefit of this condition also makes it such that a dynamic programming solution can be created as there will be no cyclic dependencies and allow the game to be computed in stages.
 Hog adds complexity to this game in that a person can actually throw more dice to increase their score - changing the heuristic. Now in order to play optimally, one must actually estimate the probability of rolling *n* dice with each roll not containing a value of 1.
 
-<center>
 ![](https://latex.codecogs.com/gif.latex?P%28p%2Cn%2Cs%29%20%3D%20%281/6%29%5E%7Bn%7D%5Csum_%7Bk%3D0%7D%5E%7B%5Clfloor%20%28p-n%29/s%20%5Crfloor%29%7D%28-1%29%5E%7Bk%7D%7Bn%20%5Cchoose%20k%7D%7Bp-sk-1%20%5Cchoose%20n-1%7D)
-</center>
 
 Where *p* is the value, *n* is the number of dice, and *s* is the number of sides to a single dice. To exclude all possibilities such that any dice comes up to one, I subtract 2 from the value p and calculate the probability off that.
 
